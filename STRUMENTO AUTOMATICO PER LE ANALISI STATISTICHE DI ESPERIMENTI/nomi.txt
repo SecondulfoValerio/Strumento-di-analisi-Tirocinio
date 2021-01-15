@@ -1,0 +1,8 @@
+Nomi;Nomignoli;Anni
+Mario;Gianni;26
+Paola;Maria;67
+Chiara;Paolo;12
+Mario;Maria; 
+Gianni;;41
+ ;Nino;12
+ ;; 
