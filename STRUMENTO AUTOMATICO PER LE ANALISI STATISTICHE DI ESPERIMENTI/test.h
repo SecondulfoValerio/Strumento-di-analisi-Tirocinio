@@ -16,8 +16,12 @@ void testgetCategorie(char*** matrice,int righe, int pos, int catnum);
 void testprintMatTest(double** matrice,int righe,int colonne);
 void testgetposPrincipal(FILE* fp);
 void testgetposOutuput(FILE* fp);
-void testtotalelements(double** matrice, int row, int col);
-
+void testtotalElements(double** matrice, int row, int col);
+void testdegfreedom(int row,int col);
+void testexpectedValue(double** matrice, int row,int col);
+void printrowsumsarray(double** matrice, int row,int col);
+void printcolumnsumsarray(double** matrice, int row,int col);
+void testchivalue(double**matrice,int row,int col);
 
 /*FUNZIONI*/
 
@@ -85,12 +89,14 @@ void testgetCategorie(char*** matrice,int righe, int pos, int catnum){
 
 //STAMPA MATRICE PER IL TEST
 void testprintMatTest(double** matrice,int righe,int colonne){
+	printf("----------------------------------------\n");
 	printf("Matrice per il Test\n");
 	for(int i=0;i<righe;i++){
 		for(int j=0;j<colonne;j++)
 			printf("%lf ",matrice[i][j]);
 		printf("\n");
 	}
+	printf("----------------------------------------\n");
 }
 
 //STAMPA POSIZIONE COLONNA PRINCIPALE
@@ -106,15 +112,46 @@ void testgetposOutuput(FILE* fp){
 void testgetOccurence(char*** matrice,char* nomeA, char* nomeB, int posA, int posB, int righe){
 	printf("Numero di occorrenze di %s %s=%d\n",nomeA,nomeB,getOccurence(matrice,nomeA,nomeB,posA,posB,righe));
 }
-
+//STAMPA LA SOMMATORIA GLI ELEMENTI PER OGNI RIGA DELLA MATRICE
 void testtotalrow(double** matrice, int row, int col){
-	printf("Totale riga %d:%lf\n",row+1,totalrow(matrice,row,col));
+	for(int i=0;i<row;i++)
+		printf("Totale riga %d: %lf\n",i+1,totalrow(matrice,i,col));
 }
+//STAMPA LA SOMMATORIA GLI ELEMENTI PER OGNI COLONNA DELLA MATRICE
 void testtotalcol(double** matrice, int row, int col){
-	printf("Totale colonna %d:%lf\n",col+1,totalcol(matrice,row,col));
+	for(int i=0;i<col;i++)
+		printf("Totale colonna %d: %lf\n",i+1,totalcol(matrice,row,i));
 }
-void testtotalelements(double** matrice, int row, int col){
-	printf("Totale elementi matrice=%f \n",totalelements(matrice,row,col));
+//STAMPA LA SOMMATORIA DEGLI ELEMENTI DELLA MATRICE
+void testtotalElements(double** matrice, int row, int col){
+	printf("Totale elementi matrice=%f \n",totalElements(matrice,row,col));
+}
+//STAMPA I GRADI DI LIBERTA' DELLA MATRICE
+void testdegfreedom(int row,int col){
+	printf("Gradi di libertà= %d\n",degfreedom(row,col));
+}
+//STAMPA L'EXPECTED VALUE PER OGNI VALORE DELLA MATRICE
+void  testexpectedValue(double** matrice, int row,int col){
+	double tot= totalElements(matrice,row,col);
+	for(int i=0;i<row;i++)
+		for(int j=0;j<col;j++)
+			printf("Expected Value riga %d colonna %d: %lf = %lf\n",i+1,j+1,matrice[i][j],expectedValue(totalrow(matrice,i,col),totalcol(matrice,row,j),tot));
+									}
+//STAMPA GLI ELEMENTI DELL'ARRAY CHE CONTIENE LE SOMME DEGLI ELEMENTI PER OGNI RIGA DELLA MATRICE
+void testrowsums(double** matrice, int row,int col){
+	double* rowsum= rowsums(matrice,row,col);
+	for(int i=0;i<row;i++)
+		printf("Sommatoria riga %d = %lf\n",i+1,rowsum[i]);
+}
+//STAMPA GLI ELEMENTI DELL'ARRAY CHE CONTIENE LE SOMME DEGLI ELEMENTI PER OGNI COLONNA DELLA MATRICE
+void testcolumnsums(double** matrice, int row,int col){
+	double* colsum= columnsums(matrice,row,col);
+		for(int i=0;i<col;i++)
+			printf("Sommatoria colonna %d = %lf\n",i+1,colsum[i]);
+}
+//STAMPA CHI VALUE MATRICE
+void testchivalue(double**matrice,int row,int col){
+	printf("Chi value= %lf\n",chivalue(matrice,row,col));
 }
 
 #endif

@@ -26,7 +26,6 @@ testprintMat(tabella,righe,colonne); //TEST METODO CREA TABELLA
 testprintArrSup(relations,colonneSup); //TEST METODO CREA ARRAY RELAZIONI
 testElements(relations,colonneSup); //TEST RICONOSCIMENTO DELLE TIPOLOGIE DI DATO IN ARRAY RELAZIONI
 
-
 //COPIA PER FUMATORI
 FILE* tab2=fopen("Fumatori.txt","r");
 FILE* sup2=fopen("Fumatorisupporto.txt","r");
@@ -63,12 +62,14 @@ testgetOccurence(tabella2,"Maschio","No",principal,output,righe2);
 testgetOccurence(tabella2,"Donna","Si",principal,output,righe2);
 testgetOccurence(tabella2,"Donna","No",principal,output,righe2);
 testprintMatTest(matriceTest,rows,columns);
-testtotalrow(matriceTest,1,columns);
-testtotalcol(matriceTest,rows,1);
-testtotalelements(matriceTest,rows,columns);
-
-
-
+testtotalrow(matriceTest,rows,columns);
+testtotalcol(matriceTest,rows,columns);
+testtotalElements(matriceTest,rows,columns);
+testdegfreedom(rows,columns);
+testexpectedValue(matriceTest,rows,columns);
+testrowsums(matriceTest,rows,columns);
+testcolumnsums(matriceTest,rows,columns);
+testchivalue(matriceTest,rows,columns);
 
 
 free(tabella);
