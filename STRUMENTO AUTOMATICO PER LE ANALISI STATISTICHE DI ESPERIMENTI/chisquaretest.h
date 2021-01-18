@@ -5,7 +5,6 @@ double totalrow(double** matrice, int row, int col); //RESTITUISCE SOMMA DELLE R
 double totalcol(double** matrice, int row, int col); //RESTITUISCE SOMMA DELLE COLONNE NELLA RIGA row
 double totalElements(double** matrice, int row, int col); //RESTITUISCE SOMMA DI TUTTI GLI ELEMENTI DELLA MATRICE
 int degfreedom(int row,int col); //RESTITUISCE I GRADI DI LIBERTA' DELLA MATRICE
-double expectedValue(double rowtot,double coltot, double eltot); //RESTITUISCE IL VALORE ATTESO PER UN SINGOLO ELEMENTO DELLA MATRICE
 double* rowsums(double** matrice,int row,int col); //RESTITUISCE ARRAY CON I VALORI DELLE SOMMATORIE DELLE RIGHE DELLA MATRICE
 double* columnsums(double** matrice,int row,int col); //RESTITUISCE ARRAY CON I VALORI DELLE SOMMATORIE DELLE COLONNE DELLA MATRICE
 double expectedValue(double rowtot,double coltot, double eltot); //RESTITUISCE VALORE DI EXPECTED VALUE
@@ -76,6 +75,8 @@ double chivalue(double**matrice,int row,int col){
 	}
 	return tot;
 }
+
+
 
 
 

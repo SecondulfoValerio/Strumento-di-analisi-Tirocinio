@@ -3,6 +3,7 @@
 #include <tabreader.h>
 #include <MatrixTest.h>
 #include <chisquaretest.h>
+#include <chitablereader.h>
 
 /*DEFINIZIONI*/
 void testColonneMat(FILE* fp);
@@ -22,7 +23,10 @@ void testexpectedValue(double** matrice, int row,int col);
 void printrowsumsarray(double** matrice, int row,int col);
 void printcolumnsumsarray(double** matrice, int row,int col);
 void testchivalue(double**matrice,int row,int col);
-
+void testgetColumnNum(FILE* fp);
+void testgetRowNum(FILE* fp);
+void testgetColPos(FILE* fp,double sl);
+void testgetRowPos(FILE* fp, int df);
 /*FUNZIONI*/
 
 //STAMPA COLONNE MATRICE
@@ -153,5 +157,23 @@ void testcolumnsums(double** matrice, int row,int col){
 void testchivalue(double**matrice,int row,int col){
 	printf("Chi value= %lf\n",chivalue(matrice,row,col));
 }
+//STAMPA NUMERO RIGHE CHI TABLE
+void testgetColumnNum(FILE* fp){
+	printf("Numero colonne ChiTable:%d\n",getColumnNum(fp));
+}
+//STAMPA NUMERO COLONNE CHI TABLE
+void testgetRowNum(FILE* fp){
+	printf("Numero righe ChiTable:%d\n",getRowNum(fp));
+}
+//STAMPA POSIZIONE SL IN CHI TABLE
+void testgetColPos(FILE* fp,double sl){
+	printf("Elemento %lf in colonna %d\n",sl,getColPos(fp,sl));
+}
+//STAMPA POSIZIONE DF IN CHI TABLE
+void testgetRowPos(FILE* fp, int df){
+	printf("Elemento %d in riga %d\n",df,getRowPos(fp,df));
+}
+
+
 
 #endif

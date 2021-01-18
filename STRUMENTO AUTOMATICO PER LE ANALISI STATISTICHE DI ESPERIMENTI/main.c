@@ -6,7 +6,7 @@ int main(){
 
 FILE* tab=fopen("nomi.txt","r");
 FILE* sup=fopen("relations.txt","r");
-FILE* chitable=fopen("chitable.txt","r");
+
 
 if(tab==NULL){	printf("Il file cercato è inesistente\n"); return -1;}
 if(sup==NULL){	printf("Il file cercato è inesistente\n"); return -1;}
@@ -19,12 +19,15 @@ char*** tabella=initmat(tab);
 int* relations=initlist(sup);
 
 //TEST
+printf("\n-------------TEST BASE--------------\n");
 testColonneMat(tab); //TEST METODO COLONNE MATRICE
 testRigheMat(tab); //TEST METODO RIGHE MATRICE
 testColonneSup(sup); //TEST METODO COLONNE FILE SUPPORTO
 testprintMat(tabella,righe,colonne); //TEST METODO CREA TABELLA
 testprintArrSup(relations,colonneSup); //TEST METODO CREA ARRAY RELAZIONI
 testElements(relations,colonneSup); //TEST RICONOSCIMENTO DELLE TIPOLOGIE DI DATO IN ARRAY RELAZIONI
+printf("\n-------------FINE TEST BASE--------------\n");
+
 
 //COPIA PER FUMATORI
 FILE* tab2=fopen("Fumatori.txt","r");
@@ -40,7 +43,8 @@ double** matriceTest=makeTestMatrix(tabella2,righe2,principal,output);
 int rows=getNumCategorie(tabella2,righe2,principal);
 int columns=getNumCategorie(tabella2,righe2,output);
 
-//TEST
+//TEST FUMATORI
+printf("\n-------------TEST FUMATORI--------------\n");
 testColonneMat(tab2); //TEST METODO COLONNE MATRICE
 testRigheMat(tab2); //TEST METODO RIGHE MATRICE
 testColonneSup(sup2); //TEST METODO COLONNE FILE SUPPORTO
@@ -70,6 +74,29 @@ testexpectedValue(matriceTest,rows,columns);
 testrowsums(matriceTest,rows,columns);
 testcolumnsums(matriceTest,rows,columns);
 testchivalue(matriceTest,rows,columns);
+printf("\n-------------FINE TEST FUMATORI--------------\n");
+
+//CHI TABLE
+FILE* chitable=fopen("chitable.txt","r");
+
+//TEST CHI TABLE
+printf("\n-------------TEST CHI TABLE--------------\n");
+testgetColumnNum(chitable);
+testgetRowNum(chitable);
+double sl=0.05; double sl2=0.001; double sl3=0.995; double sl4= 0.975;
+testgetColPos(chitable,sl);
+testgetColPos(chitable,sl2);
+testgetColPos(chitable,sl3);
+testgetColPos(chitable,sl4);
+testgetRowPos(chitable,1);
+testgetRowPos(chitable,2);
+testgetRowPos(chitable,4);
+testgetRowPos(chitable,6);
+testgetRowPos(chitable,50);
+testgetRowPos(chitable,66);
+
+
+printf("\n-------------FINE TEST CHI TABLE--------------\n");
 
 
 free(tabella);

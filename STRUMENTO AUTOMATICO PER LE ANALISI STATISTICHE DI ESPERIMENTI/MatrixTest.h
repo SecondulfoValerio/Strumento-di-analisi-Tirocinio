@@ -92,11 +92,54 @@ double** makeTestMatrix(char*** matrice,int righe,int colonnaI,int colonnaO){
 
 }
 
+/*         METODI TEST PER LA COMBINAZIONE PRINCIPALE-SECONDARIA
+int getThreeOccurence(char*** matrice,char* nomeA, char* nomeB,char* nomeC, int posA, int posB, int posC, int righe){
+	int occ=0;
+	for(int i=1;i<righe;i++){
+		if(matrice[i][posA]==NULL)
+				continue;
+		if( strcmp(matrice[i][posA],nomeA)==0){
+			if(matrice[i][posB]==NULL)
+				continue;
+			if( strcmp(matrice[i][posB],nomeB)==0){
+				if(matrice[i][posC]==NULL)
+					continue;
+				if(strcmp(matrice[i][posC],nomeC)==0)
+					occ++;
+			}
+		}
+	}
+	return occ;
+}
+
+
+
+
+double** makeTestThreeMatrix(char*** matrice,int righe,int colonnaI,int colonnaO,int colonnaS){
+	int rows= getNumCategorie(matrice,righe,colonnaI); //numero di categorie nella colonna Input
+	int col= getNumCategorie(matrice,righe,colonnaO); //numero di categorie nella colonna Output
+	int rowsS= getNumCategorie(matrice,righe,colonnaS); //numero di categorie nella colonna Secondaria
+	char** catP= getCategorie(matrice,righe,colonnaI,rows); //array con le categorie nella colonna Input
+	char** catO= getCategorie(matrice,righe,colonnaO,col); //array col le categorie nella colonna Output
+	char** catS= getCategorie(matrice,righe,colonnaS,rowsS);
+	double** testmatrix= (double**)calloc(rows,sizeof(double*));
+
+	for(int i=0;i<rows;i++){
+		testmatrix[i]=(double*)calloc(col,sizeof(double));
+		for(int j=0;j<col;j++)
+			testmatrix[i][j]= getThreeOccurence(matrice,catP[i],catO[j],catS[]colonnaI,colonnaO,righe);
+
+	}
+	return testmatrix;
+
+
+}
 
 
 
 
 
+*/
 
 
 
