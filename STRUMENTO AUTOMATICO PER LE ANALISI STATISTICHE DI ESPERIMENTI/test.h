@@ -27,6 +27,8 @@ void testgetColumnNum(FILE* fp);
 void testgetRowNum(FILE* fp);
 void testgetColPos(FILE* fp,double sl);
 void testgetRowPos(FILE* fp, int df);
+void testgetCriticalValue(FILE* fp,int sl,int df);
+
 /*FUNZIONI*/
 
 //STAMPA COLONNE MATRICE
@@ -173,7 +175,14 @@ void testgetColPos(FILE* fp,double sl){
 void testgetRowPos(FILE* fp, int df){
 	printf("Elemento %d in riga %d\n",df,getRowPos(fp,df));
 }
-
+//STAMPA CRITICAL VALUE IN CHI TABLE
+void testgetCriticalValue(FILE* fp,int df,int sl){
+	printf("Elemento DF= %d SL= %d=%lf\n",df,sl,getCriticalValue(fp,df,sl));
+}
+//STAMPA RISULTATO CHI TEST
+void testchiTestCompare(double cv,double chiv){
+	chiTestCompare(cv,chiv);
+}
 
 
 #endif

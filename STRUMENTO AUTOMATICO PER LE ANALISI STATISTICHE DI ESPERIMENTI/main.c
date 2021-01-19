@@ -92,8 +92,23 @@ testgetRowPos(chitable,1);
 testgetRowPos(chitable,2);
 testgetRowPos(chitable,4);
 testgetRowPos(chitable,6);
+testgetRowPos(chitable,24);
+testgetRowPos(chitable,56);
+testgetRowPos(chitable,12);
+testgetRowPos(chitable,32);
 testgetRowPos(chitable,50);
 testgetRowPos(chitable,66);
+testgetCriticalValue(chitable,3,6);
+testgetCriticalValue(chitable,3,6);
+testgetCriticalValue(chitable,0,6);
+testgetCriticalValue(chitable,-1,6);
+testgetCriticalValue(chitable,200,6);
+testgetCriticalValue(chitable,14,6);
+testgetCriticalValue(chitable,51,6);
+testgetCriticalValue(chitable,51,8);
+testgetCriticalValue(chitable,51,11);
+testgetCriticalValue(chitable,51,12);
+
 
 
 printf("\n-------------FINE TEST CHI TABLE--------------\n");
