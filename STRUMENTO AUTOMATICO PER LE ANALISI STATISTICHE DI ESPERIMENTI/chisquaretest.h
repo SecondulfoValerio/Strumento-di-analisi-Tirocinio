@@ -10,6 +10,7 @@ double* columnsums(double** matrice,int row,int col); //RESTITUISCE ARRAY CON I 
 double expectedValue(double rowtot,double coltot, double eltot); //RESTITUISCE VALORE DI EXPECTED VALUE
 double chivalue(double**matrice,int row,int col); //RESTITUISCE CHI-VALUE MATRICE
 
+
 double totalrow(double** matrice, int row, int col){
 
 	double tot=0;

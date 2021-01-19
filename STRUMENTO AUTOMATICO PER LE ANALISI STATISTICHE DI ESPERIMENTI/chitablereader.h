@@ -8,6 +8,7 @@ int getRowNum(FILE* fp); //RITORNA NUMERO DI RIGHE CHAR TABLE
 int getColPos(FILE* fp,double sl); //RITORNA POSIZIONE IN COLONNA DI VALORE SL
 int getRowPos(FILE* fp,int df); //RITORNA POSIZIONE IN RIGA DI DF
 double getCriticalValue(FILE* fp,int df,int sl); //RITORNA CRITICAL VALUE DALLA CHI TABLE
+void chiTestCompare(double cv,double chiv); //STAMPA IL RISULTATO DEL TEST
 
 int getColumnNum(FILE* fp){
 	if(fp==NULL){printf("File non trovato\n"); return -1;}
