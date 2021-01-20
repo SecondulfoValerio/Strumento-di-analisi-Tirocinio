@@ -76,6 +76,55 @@ testcolumnsums(matriceTest,rows,columns);
 testchivalue(matriceTest,rows,columns);
 printf("\n-------------FINE TEST FUMATORI--------------\n");
 
+//NEW FUMATORI
+//COPIA PER NEW FUMATORI
+FILE* tab3=fopen("NewFumatori.txt","r");
+FILE* sup3=fopen("Fumatorisupporto.txt","r");
+int colonne3=numcolMat(tab3);
+int righe3= numrow(tab3);
+int colonneSup3=numcolSup(sup3);
+char*** tabella3=initmat(tab3);
+int* relations3=initlist(sup3);
+int principal2=getposPrincipal(sup3);
+int output2=getposOutput(sup3);
+double** matriceTest2=makeTestMatrix(tabella3,righe3,principal2,output2);
+int rows2=getNumCategorie(tabella3,righe3,principal2);
+int columns2=getNumCategorie(tabella3,righe3,output2);
+
+//TEST  NEW FUMATORI
+printf("\n-------------TEST NEW FUMATORI--------------\n");
+testColonneMat(tab3); //TEST METODO COLONNE MATRICE
+testRigheMat(tab3); //TEST METODO RIGHE MATRICE
+testColonneSup(sup2); //TEST METODO COLONNE FILE SUPPORTO
+testprintMat(tabella3,righe3,colonne3); //TEST METODO CREA TABELLA
+testprintArrSup(relations3,colonneSup3); //TEST METODO CREA ARRAY RELAZIONI
+testElements(relations3,colonneSup3); //TEST RICONOSCIMENTO DELLE TIPOLOGIE DI DATO IN ARRAY RELAZIONI
+testgetNumCategorie(tabella3,righe3,0);
+testgetNumCategorie(tabella3,righe3,1);
+testgetNumCategorie(tabella3,righe3,2);
+testgetNumCategorie(tabella3,righe3,3);
+testgetCategorie(tabella3,righe3,0,getNumCategorie(tabella3,righe3,0));
+testgetCategorie(tabella3,righe3,1,getNumCategorie(tabella3,righe3,1));
+testgetCategorie(tabella3,righe3,2,getNumCategorie(tabella3,righe3,2));
+testgetCategorie(tabella3,righe3,3,getNumCategorie(tabella3,righe3,3));
+testgetposPrincipal(sup3);
+testgetposOutuput(sup3);
+testgetOccurence(tabella3,"Maschio","Si",principal2,output2,righe3);
+testgetOccurence(tabella3,"Maschio","No",principal2,output2,righe3);
+testgetOccurence(tabella3,"Donna","Si",principal2,output2,righe3);
+testgetOccurence(tabella3,"Donna","No",principal2,output2,righe3);
+testprintMatTest(matriceTest,rows2,columns2);
+testtotalrow(matriceTest2,rows2,columns2);
+testtotalcol(matriceTest2,rows2,columns2);
+testtotalElements(matriceTest2,rows2,columns2);
+testdegfreedom(rows,columns2);
+testexpectedValue(matriceTest2,rows2,columns2);
+testrowsums(matriceTest2,rows2,columns2);
+testcolumnsums(matriceTest2,rows2,columns2);
+testchivalue(matriceTest2,rows2,columns2);
+printf("\n-------------FINE TEST NEW FUMATORI--------------\n");
+
+
 //CHI TABLE
 FILE* chitable=fopen("chitable.txt","r");
 
