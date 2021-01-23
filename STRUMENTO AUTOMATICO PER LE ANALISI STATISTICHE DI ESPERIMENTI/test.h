@@ -28,6 +28,9 @@ void testgetRowNum(FILE* fp);
 void testgetColPos(FILE* fp,double sl);
 void testgetRowPos(FILE* fp, int df);
 void testgetCriticalValue(FILE* fp,int sl,int df);
+void testgetChiTestResult(double y1,double y2,double  x1,double x2,double chiv);
+void testgetSignificanceLevel(FILE*fp,int pos);
+void testchiTestCompare(FILE* fp, double chivalue,int df);
 
 /*FUNZIONI*/
 
@@ -179,10 +182,21 @@ void testgetRowPos(FILE* fp, int df){
 void testgetCriticalValue(FILE* fp,int df,int sl){
 	printf("Elemento DF= %d SL= %d=%lf\n",df,sl,getCriticalValue(fp,df,sl));
 }
-//STAMPA RISULTATO CHI TEST
-void testchiTestCompare(double cv,double chiv){
+//STAMPA RISULTATO CHI TEST (DA TOGLIERE POI)
+/*void testchiTestCompare(double cv,double chiv){
 	chiTestCompare(cv,chiv);
+} */
+//STAMPA RISULTATO CHI TEST NUOVO METODO
+void testgetChiTestResult(double y1,double y2,double  x1,double x2,double chiv){
+	 getChiTestResult( y1, y2,  x1, x2, chiv);
 }
-
+//STAMPA SL IN POSIZIONE POS IN CHI TABLE
+void testgetSignificanceLevel(FILE*fp,int pos){
+	printf("Significance Level:%lf\n",getSignificanceLevel(fp,pos));
+}
+//STAMPA RISULTATO CHI TEST
+void testchiTestCompare(FILE* fp, double chivalue,int df){
+	chiTestCompare(fp,chivalue,df);
+}
 
 #endif

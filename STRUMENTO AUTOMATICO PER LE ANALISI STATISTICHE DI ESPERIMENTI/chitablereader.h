@@ -8,7 +8,9 @@ int getRowNum(FILE* fp); //RITORNA NUMERO DI RIGHE CHAR TABLE
 int getColPos(FILE* fp,double sl); //RITORNA POSIZIONE IN COLONNA DI VALORE SL
 int getRowPos(FILE* fp,int df); //RITORNA POSIZIONE IN RIGA DI DF
 double getCriticalValue(FILE* fp,int df,int sl); //RITORNA CRITICAL VALUE DALLA CHI TABLE
-void chiTestCompare(double cv,double chiv); //STAMPA IL RISULTATO DEL TEST
+//void chiTestCompare(double cv,double chiv); STAMPA IL RISULTATO DEL TEST
+void chiTestCompare(FILE* fp, double chivalue,int df); //STAMPA RISULTATO TEST (nuovo metodo)
+
 
 int getColumnNum(FILE* fp){
 	if(fp==NULL){printf("File non trovato\n"); return -1;}
@@ -120,6 +122,7 @@ double getCriticalValue(FILE* fp,int df,int sl){
 	int row=0;
 	int col=0;
 	c=fgetc(fp);
+
 	if(df==0 || df <0 || df>51){
 		printf("Valore Degrees of Freedom DF invalido"); return -1;
 	}
@@ -153,7 +156,7 @@ double getCriticalValue(FILE* fp,int df,int sl){
 	printf("Errore valore non trovato\n"); return -1;
 }
 
-
+/*
 void chiTestCompare(double cv,double chiv){
 	if(cv>chiv){
 		printf("Il valore Chi Value: %lf è inferiore rispetto al valore critico %lf\nL'ipotesi nulla non può essere rifiutata...\n",chiv,cv);
@@ -164,6 +167,177 @@ void chiTestCompare(double cv,double chiv){
 	if(cv<chiv){
 				printf("Il valore Chi Value: %lf è maggiore rispetto al valore critico %lf\nL'ipotesi nulla può essere rifiutata...\n",chiv,cv);
 			}
+} */
+
+void getChiTestResult(double y1,double y2,double  x1,double x2,double chiv){
+
+	double result= y1+((y2-y1)*(chiv-x1)/(x2-x1));
+	printf("\n%lf ottenuto\nLa probabilità ottenuta dal Chi Test è del: %lf%c\n",result,100-result*100,'%');
+	return;
+}
+
+double getSignificanceLevel(FILE*fp,int pos){
+		if(fp==NULL){printf("File non trovato\n"); return -1;}
+		fseek(fp,0,SEEK_SET);
+		char temp[20];
+		int tempos=0;
+		char c;
+		int p=1;
+		if(pos<1 || pos>12){printf("posizione SL invalida\n");return -1;}
+		while(p<pos){
+			c=fgetc(fp);
+			if(c==9)
+				p++;
+		}
+		c=fgetc(fp); //Mi sposto in posizione scelta con pos sul primo numero
+		while(c!=9 || c=='\r' || c=='\n' || c!=EOF){
+			if(tempos<20){
+				temp[tempos]=c;
+				tempos++;
+			}
+			c=fgetc(fp);
+			if(c=='\r' || c=='\n' || c==EOF)
+				break;
+		}
+		return atof(temp);
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void chiTestCompare(FILE* fp, double chivalue,int df){
+	if(fp==NULL){printf("File non trovato\n"); return;}
+	fseek(fp,0,SEEK_SET);
+	char temp1[20];
+	char temp2[20];
+	int pos1=0;
+	int pos2=0;
+	int tempos=0;
+	char c;
+	int row=0;
+	int stop=0;
+
+	if(df==0 || df <0 || df>50){
+		printf("Valore Degrees of Freedom DF invalido"); return;
+	}
+	c=fgetc(fp);
+	while(row<df || c!=EOF){ //mi sposto sulla riga pari a DF
+
+				c=fgetc(fp);
+				if(c=='\n')
+					row+=1;
+				if(row==df)
+					break;
+			}
+
+	while(c=='\n' || c=='\r') //mi sposto sul primo numero della riga
+		c=fgetc(fp);
+	while(c!=9){ //Deve superare il numero in prima colonna che indica il df
+		c=fgetc(fp);
+	}
+	c=fgetc(fp);
+	while(c!=9){ //salvo primo numero e effettuo la prima comparazione. Se ha successo mi fermo altrimenti continuo
+
+		if(tempos<20){
+			temp1[tempos]=c;
+			tempos++;
+		}
+		c=fgetc(fp);
+	}
+	if(atof(temp1)==chivalue){ //caso in cui chi value < del valore della prima colonna
+			pos1=2;
+			pos2=-2;
+		}
+	else if(atof(temp1)>chivalue){ //caso in cui chi value < del valore della prima colonna
+		pos1=2;
+		pos2=-1;
+	}
+	else{
+		pos1=2;
+		pos2=1;
+
+		while(stop!=1){
+
+			if(c=='\n' || c=='\r'){
+			pos1=-1; pos2=-1;
+			break;
+			}
+
+			c=fgetc(fp);
+
+			for(int i=0;i<20;i++) //copio i valori di temp1 in temp2
+				temp2[i]=temp1[i];
+			tempos=0;
+			memset(temp1, 0, sizeof(temp1)); //resetto temp1
+
+			while(c!=9 && c!=EOF && c!='\n' && c!='\r'){ //salvo prossimo numero in temp1
+				if(tempos<20){
+					temp1[tempos]=c;
+					tempos++;
+				}
+				c=fgetc(fp);
+			}
+			pos1++; pos2++;
+			if(atof(temp1)>chivalue && atof(temp2)<chivalue )
+				break;
+			if(atof(temp1)<chivalue && c=='\r'){ //Caso in cui ultimo numero in colonna 12 è minore di chi value (pos1=12 pos2=-1)
+				pos2=-1;
+				break;
+			}
+			if(atof(temp1)==chivalue){ //Caso in cui chi value==valore in tabella
+				pos2=-2;
+				break;
+						}
+		}
+
+	}
+	//FINE ELSE. ORA SI ANALIZZANO I CASI DEI VARI VALORI DI POS1 E POS2
+
+	if(pos1==-1 && pos2==-1){
+		printf("Caso1:Non contenuto\n"); //DA TOGLIERE
+		printf("Errore nel calcolo della probabilità: impossibile trovare il livello di significatività in Chi Table con grado %d\n",df);
+		return;
+	}
+	if(pos1==2 && pos2==-1){  		 //QUANDO CHI VALUE = EL IN COLONNA
+		printf("Caso2:Valore<colonna 1\n");  //DA TOGLIERE
+		printf("DF=%d ",df); //DA TOGLIERE
+		printf("Y2=%lf - X1=%lf - CHI VALUE=%lf\n",getSignificanceLevel(fp,pos1),atof(temp1),chivalue);
+		getChiTestResult(0,getSignificanceLevel(fp,pos1),0,atof(temp1),chivalue);
+		return;
+	}
+	if(pos2==-2){  		 //QUANDO CHI VALUE = EL IN COLONNA
+		printf("Caso3:Valore==colonna\n");  //DA TOGLIERE
+		printf("DF=%d ",df); //DA TOGLIERE
+		printf("Y2=%lf - X1=%lf - CHI VALUE=%lf\n",getSignificanceLevel(fp,pos1),atof(temp1),chivalue);
+		getChiTestResult(0,getSignificanceLevel(fp,pos1),0,atof(temp1),chivalue);
+		return;
+	}
+	if(pos1==12 && pos2==-1){		//QUANDO CHI VALUE > EL IN 12A COLONNA (ultima colonna)
+		printf("Caso4:Valore>Ultima colonna\n");  //DA TOGLIERE
+		printf("DF=%d ",df); //DA TOGLIERE
+		printf("Y2=%lf - X1=%lf - CHI VALUE=%lf\n",getSignificanceLevel(fp,pos1),atof(temp1),chivalue);
+		getChiTestResult(0,getSignificanceLevel(fp,pos1),0,atof(temp1),chivalue);
+		return;
+	}
+	/*caso in cui il chi value è compreso tra due valori*/
+	if(pos1<13 && pos2>1){
+		printf("Caso5:Valori compresi tra prima e ultima colonna\n");  //DA TOGLIERE
+		printf("DF=%d ",df); //DA TOGLIERE
+		printf("Y1=%lf - Y2=%lf - X2=%lf - X1=%lf - CHIV=%lf\n",getSignificanceLevel(fp,pos2),getSignificanceLevel(fp,pos1),
+				atof(temp1),atof(temp2),chivalue);
+		getChiTestResult(getSignificanceLevel(fp,pos2),getSignificanceLevel(fp,pos1),atof(temp2),atof(temp1),chivalue);
+
+	}
 }
 
 

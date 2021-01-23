@@ -157,7 +157,22 @@ testgetCriticalValue(chitable,51,6);
 testgetCriticalValue(chitable,51,8);
 testgetCriticalValue(chitable,51,11);
 testgetCriticalValue(chitable,51,12);
-
+testgetChiTestResult(0.1,0.05,4.605,5.991,5);
+for(int i=0;i<13;i++)
+	testgetSignificanceLevel(chitable,i);
+printf("----------TEST----------------\n");testchiTestCompare(chitable,0.950000,2);
+printf("----------TEST----------------\n");testchiTestCompare(chitable,0.0100,2);
+printf("----------TEST----------------\n");testchiTestCompare(chitable,13.816,2);
+printf("----------TEST----------------\n");testchiTestCompare(chitable,13.816,1);
+printf("----------TEST----------------\n");testchiTestCompare(chitable,13.816,1);
+printf("----------TEST----------------\n");testchiTestCompare(chitable,13.816,1);
+printf("----------TEST----------------\n");testchiTestCompare(chitable,13.816,50);
+printf("----------TEST----------------\n");testchiTestCompare(chitable,13.816,47);
+printf("----------TEST----------------\n");testchiTestCompare(chitable,13.816,40);
+printf("----------TEST----------------\n");testchiTestCompare(chitable,13.816,25);
+printf("----------TEST----------------\n");testchiTestCompare(chitable,27.991,50);
+printf("----------TEST----------------\n");testchiTestCompare(chitable,86.661,50);
+printf("----------TEST----------------\n");testchiTestCompare(chitable,72.002,50);
 
 
 printf("\n-------------FINE TEST CHI TABLE--------------\n");
