@@ -7,6 +7,7 @@ int getNumCategorie(char*** matrice,int righe,int pos); //RESTITUISCE IL NUMERO 
 char** getCategorie(char*** matrice, int righe,int pos,int catnum); //RESTIUISCE UN ARRAY DI STRINGHE CON LE CATEGORIE
 int getOccurence(char*** matrice,char* nomeA, char* nomeB, int posA, int posB, int righe);//RESTITUISCE NUMERI DI OCCORRENZE DI ELEMENTO NOME1=A NOME2=B NELLA MATRICE
 double** makeTestMatrix(char*** matrice,int righe,int colonnaI,int colonnaO);//CREA E RESTITUISCE LA MATRICE CON I DATI PER IL TEST
+int getCatOccurence(char*** matrice,int rows,int col,char* categoria);
 
 /*FUNZIONI*/
 
@@ -91,6 +92,34 @@ double** makeTestMatrix(char*** matrice,int righe,int colonnaI,int colonnaO){
 
 
 }
+
+int getCatOccurence(char*** matrice,int rows,int col,char* categoria){
+	if(matrice==NULL){printf("Matrice non creata\n");return -1;}
+	int occ=0;
+	for(int i=0;i<rows;i++){
+		if(matrice[i][col]==NULL)
+			continue;
+		if(strcmp(matrice[i][col],categoria)==0)
+			occ++;
+	}
+	return occ;
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*         METODI TEST PER LA COMBINAZIONE PRINCIPALE-SECONDARIA
 int getThreeOccurence(char*** matrice,char* nomeA, char* nomeB,char* nomeC, int posA, int posB, int posC, int righe){

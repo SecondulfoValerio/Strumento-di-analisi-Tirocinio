@@ -4,6 +4,7 @@
 #include <MatrixTest.h>
 #include <chisquaretest.h>
 #include <chitablereader.h>
+#include <filtermatrix.h>
 
 /*DEFINIZIONI*/
 void testColonneMat(FILE* fp);
@@ -17,6 +18,7 @@ void testgetCategorie(char*** matrice,int righe, int pos, int catnum);
 void testprintMatTest(double** matrice,int righe,int colonne);
 void testgetposPrincipal(FILE* fp);
 void testgetposOutuput(FILE* fp);
+void testgetNameColumn(FILE* fp,int pos);
 void testtotalElements(double** matrice, int row, int col);
 void testdegfreedom(int row,int col);
 void testexpectedValue(double** matrice, int row,int col);
@@ -31,6 +33,8 @@ void testgetCriticalValue(FILE* fp,int sl,int df);
 void testgetChiTestResult(double y1,double y2,double  x1,double x2,double chiv);
 void testgetSignificanceLevel(FILE*fp,int pos);
 void testchiTestCompare(FILE* fp, double chivalue,int df);
+void testsecondarycol(int* support,int el);
+void testgetCatOccurence(char*** matrice,int rows,int col,char* categoria);
 
 /*FUNZIONI*/
 
@@ -117,6 +121,10 @@ void testgetposPrincipal(FILE* fp){
 void testgetposOutuput(FILE* fp){
 	printf("La colonna Outuput è la %da\n",getposOutput(fp)+1);
 }
+//STAMPA NOME IN COLONNA POS
+void testgetNameColumn(FILE* fp,int pos){
+	getNameColumn(fp,pos);
+}
 //STAMPA LE OCCORRENZE DI VALORE A IN COLONNA 1 E VALORE B IN COLONNA 2
 void testgetOccurence(char*** matrice,char* nomeA, char* nomeB, int posA, int posB, int righe){
 	printf("Numero di occorrenze di %s %s=%d\n",nomeA,nomeB,getOccurence(matrice,nomeA,nomeB,posA,posB,righe));
@@ -198,5 +206,18 @@ void testgetSignificanceLevel(FILE*fp,int pos){
 void testchiTestCompare(FILE* fp, double chivalue,int df){
 	chiTestCompare(fp,chivalue,df);
 }
+//STAMPA ARRAY CON LE COLONNE RELEVANT-SECONDARIA DEL FILE DI SUPPORTO
+void testsecondarycol(int* support,int el){
+	int* array=secondarycol(support,el);
+	for(int i=0;i<el;i++)
+		printf("Colonna %d=%d\n",i,array[i]);
+}
+//STAMPA NUMERO DI OCCORRENZE DI UNA CATEGORIA
+void testgetCatOccurence(char*** matrice,int rows,int col,char* categoria){
+	printf("Numero occorrenze categoria %s=%d\n",categoria,getCatOccurence(matrice,rows,col,categoria));
+
+}
+
+
 
 #endif

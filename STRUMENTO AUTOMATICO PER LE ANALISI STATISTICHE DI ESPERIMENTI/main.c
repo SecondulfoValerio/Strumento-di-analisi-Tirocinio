@@ -177,6 +177,115 @@ printf("----------TEST----------------\n");testchiTestCompare(chitable,72.002,50
 
 printf("\n-------------FINE TEST CHI TABLE--------------\n");
 
+//TEST TESTFUMATORI
+printf("\n---------------------------------INIZIO TEST FINALE-------------------------------------------\n");
+
+FILE* filefumatori=fopen("testfumatori.txt","r");
+FILE* filesupfumatori=fopen("testfumatorisupporto.txt","r");
+int colonnef=numcolMat(filefumatori);
+int righef= numrow(filefumatori);
+int colonneSupf=numcolSup(filesupfumatori);
+char*** fumatoritab=initmat(filefumatori);
+int* relationsf=initlist(filesupfumatori);
+int principalf=getposPrincipal(filesupfumatori);
+int outputf=getposOutput(filesupfumatori);
+double** matriceTestf=makeTestMatrix(fumatoritab,righef,principalf,outputf);
+int rowsf=getNumCategorie(fumatoritab,righef,principalf);
+int columnsf=getNumCategorie(fumatoritab,righef,outputf);
+int* secondarycolpos=secondarycol(relationsf,colonneSupf);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+printf("\n---------------------------------FINE TEST FINALE-------------------------------------------\n");
+
+
+
+
+
+
+/*
+printf("\n-------------INIZIO TEST FUMATORITEST--------------\n");
+testColonneMat(filefumatori); //TEST METODO COLONNE MATRICE
+testRigheMat(filefumatori); //TEST METODO RIGHE MATRICE
+testColonneSup(filesupfumatori); //TEST METODO COLONNE FILE SUPPORTO
+testprintMat(fumatoritab,righef,colonnef); //TEST METODO CREA TABELLA
+testprintArrSup(relationsf,colonneSupf); //TEST METODO CREA ARRAY RELAZIONI
+testElements(relationsf,colonneSupf); //TEST RICONOSCIMENTO DELLE TIPOLOGIE DI DATO IN ARRAY RELAZIONI
+testgetNumCategorie(fumatoritab,righef,0);
+testgetNumCategorie(fumatoritab,righef,1);
+testgetNumCategorie(fumatoritab,righef,2);
+testgetNumCategorie(fumatoritab,righef,3);
+testgetNumCategorie(fumatoritab,righef,4);
+testgetCategorie(fumatoritab,righef,0,getNumCategorie(fumatoritab,righef,0));
+testgetCategorie(fumatoritab,righef,1,getNumCategorie(fumatoritab,righef,1));
+testgetCategorie(fumatoritab,righef,2,getNumCategorie(fumatoritab,righef,2));
+testgetCategorie(fumatoritab,righef,3,getNumCategorie(fumatoritab,righef,3));
+testgetCategorie(fumatoritab,righef,4,getNumCategorie(fumatoritab,righef,4));
+testgetposPrincipal(filesupfumatori);
+testgetposOutuput(filesupfumatori);
+testgetOccurence(fumatoritab,"Maschio","Si",principalf,outputf,righef);
+testgetOccurence(fumatoritab,"Maschio","No",principalf,outputf,righef);
+testgetOccurence(fumatoritab,"Donna","Si",principalf,outputf,righef);
+testgetOccurence(fumatoritab,"Donna","No",principalf,outputf,righef);
+testprintMatTest(matriceTestf,rowsf,columnsf);
+testtotalrow(matriceTestf,rowsf,columnsf);
+testtotalcol(matriceTestf,rowsf,columnsf);
+testtotalElements(matriceTestf,rowsf,columnsf);
+testdegfreedom(rowsf,columnsf);
+testexpectedValue(matriceTestf,rowsf,columnsf);
+testrowsums(matriceTestf,rowsf,columnsf);
+testcolumnsums(matriceTestf,rowsf,columnsf);
+testchivalue(matriceTestf,rowsf,columnsf);
+testsecondarycol(relationsf,colonneSupf);
+testgetCatOccurence(fumatoritab,righef,2,"Sicilia");
+testgetCatOccurence(fumatoritab,righef,2,"Lazio");
+testgetCatOccurence(fumatoritab,righef,2,"Calabria");
+testgetCatOccurence(fumatoritab,righef,2,"Campania");
+int p1=getCatOccurence(fumatoritab,righef,2,"Sicilia");
+int p2=getCatOccurence(fumatoritab,righef,2,"Lazio");
+int p3=getCatOccurence(fumatoritab,righef,2,"Campania");
+char*** filteredmat1=filtermatrix(fumatoritab,"Sicilia",p1,2,righef,colonnef);
+printf("SICILIA\n");
+for(int i=0;i<p1;i++){
+	for(int c=0;c<colonnef;c++)
+		printf("%s ", filteredmat1[i][c]);
+	printf("\n");
+}
+char*** filteredmat2=filtermatrix(fumatoritab,"Lazio",p2,2,righef,colonnef);
+printf("LAZIO\n");
+for(int i=0;i<p2;i++){
+	for(int c=0;c<colonnef;c++)
+		printf("%s ", filteredmat2[i][c]);
+	printf("\n");
+}
+char*** filteredmat3=filtermatrix(fumatoritab,"Campania",p3,2,righef,colonnef);
+printf("CAMPANIA\n");
+for(int i=0;i<p3;i++){
+	for(int c=0;c<colonnef;c++)
+		printf("%s ", filteredmat3[i][c]);
+	printf("\n");
+}
+*/
+printf("\n---------------------------------TEST FINALE-------------------------------------------\n");
+
+
+
+
+
+
+
+printf("\n-------------FINE TEST FUMATORITEST--------------\n");
 
 free(tabella);
 free(relations);
