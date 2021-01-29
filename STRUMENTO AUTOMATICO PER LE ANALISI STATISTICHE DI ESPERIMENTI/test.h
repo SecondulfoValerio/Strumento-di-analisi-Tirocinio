@@ -45,7 +45,7 @@ void testColonneMat(FILE* fp){
 }
 //STAMPA RIGHE MATRICE
 void testRigheMat(FILE* fp){
-	printf("Righe Matrice:%d\n",numcolMat(fp));
+	printf("Righe Matrice:%d\n",numrow(fp));
 	return;
 }
 //STAMPA COLONNE FILE SUPPORTO

@@ -88,15 +88,16 @@ double chivalue(double**matrice,int row,int col){
 	double temp=0;
 	for(int i=0;i<row;i++){
 		totalElements+=sumrows[i];
-	}
 
+	}
 		for(int r=0;r<row;r++)
 			for(int c=0;c<col;c++){
-				printf("\nCALCOLOCHIVALUE\n(%lf-%lf)^2/%lf\n",matrice[r][c],expectedValue(sumrows[r],sumcol[c],totalElements),expectedValue(sumrows[r],sumcol[c],totalElements));
+				//printf("\nCALCOLOCHIVALUE\n(%lf-%lf)^2/%lf\n",matrice[r][c],expectedValue(sumrows[r],sumcol[c],totalElements),expectedValue(sumrows[r],sumcol[c],totalElements));
 				temp=((matrice[r][c]- expectedValue(sumrows[r],sumcol[c],totalElements)));
 				tot+=temp*temp/expectedValue(sumrows[r],sumcol[c],totalElements);
-				printf("Uguale a=%lf\n",temp*temp/expectedValue(sumrows[r],sumcol[c],totalElements));
+				//printf("Uguale a=%lf\n",temp*temp/expectedValue(sumrows[r],sumcol[c],totalElements));
 			}
+		//printf("\n");
 
 	return tot;
 }

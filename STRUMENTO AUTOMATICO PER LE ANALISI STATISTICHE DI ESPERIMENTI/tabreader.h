@@ -62,7 +62,7 @@ int numrow(FILE* fp){ //restituisce int numero righe
 	if(fp==NULL){printf("File non trovato\n");return -1;}
 	fseek(fp,0,SEEK_SET);
 	char c;
-
+	c=fgetc(fp);
 		while(c!=EOF){
 			c=fgetc(fp);
 			if(c==EOF) return rows+1;

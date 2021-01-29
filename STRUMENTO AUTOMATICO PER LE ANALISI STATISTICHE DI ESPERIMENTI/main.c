@@ -1,9 +1,9 @@
 #include <test.h>
-
+#include <chisquareexecution.h>
 
 
 int main(){
-
+/*
 FILE* tab=fopen("nomi.txt","r");
 FILE* sup=fopen("relations.txt","r");
 
@@ -178,10 +178,11 @@ printf("----------TEST----------------\n");testchiTestCompare(chitable,72.002,50
 printf("\n-------------FINE TEST CHI TABLE--------------\n");
 
 //TEST TESTFUMATORI
-printf("\n---------------------------------INIZIO TEST FINALE-------------------------------------------\n");
+printf("\n-------------INIZIO TEST FINALE--------------\n");
 
 FILE* filefumatori=fopen("testfumatori.txt","r");
 FILE* filesupfumatori=fopen("testfumatorisupporto.txt","r");
+FILE* chitabletest=fopen("chitable.txt","r");
 int colonnef=numcolMat(filefumatori);
 int righef= numrow(filefumatori);
 int colonneSupf=numcolSup(filesupfumatori);
@@ -207,14 +208,14 @@ int* secondarycolpos=secondarycol(relationsf,colonneSupf);
 
 
 
-printf("\n---------------------------------FINE TEST FINALE-------------------------------------------\n");
+printf("\n-------------FINE TEST FINALE--------------\n");
 
 
 
 
 
 
-/*
+
 printf("\n-------------INIZIO TEST FUMATORITEST--------------\n");
 testColonneMat(filefumatori); //TEST METODO COLONNE MATRICE
 testRigheMat(filefumatori); //TEST METODO RIGHE MATRICE
@@ -276,17 +277,20 @@ for(int i=0;i<p3;i++){
 		printf("%s ", filteredmat3[i][c]);
 	printf("\n");
 }
-*/
-printf("\n---------------------------------TEST FINALE-------------------------------------------\n");
-
-
-
-
-
-
 
 printf("\n-------------FINE TEST FUMATORITEST--------------\n");
+*/
+FILE* filefumatori=fopen("testfumatori.txt","r");
+FILE* filesupfumatori=fopen("testfumatorisupporto.txt","r");
+FILE* chitabletest=fopen("chitable.txt","r");
+dotest(filefumatori,filesupfumatori,chitabletest);
 
+
+
+
+
+
+/*
 free(tabella);
 free(relations);
 fclose(tab);
@@ -299,6 +303,7 @@ free(relations2);
 fclose(tab2);
 fclose(sup2);
 free(matriceTest);
+*/
 return 0;
 
 }

@@ -1,6 +1,7 @@
 #ifndef FILTERMATRIX_H
 #define FILTERMATRIX_H
 #include <tabreader.h>
+
 int* secondarycol(int* support,int el);//PRENDE IN INPUT L'ARRAY INT DEL FILE SUPPORTO E RITORNA UN ARRAY CON LE VARIE COLONNE SECONDARY RELEVANT
 char*** filtermatrix(char*** matrix,char* categoria, int occorrenze,int colonna,int righemat,int colonnemat);/*PARTE DALLA MATRICE INIALE
  E CREA UNA MATRICE FILTRANDO SOLO LE RIGHE AVENTI LA CATEGORIA SPECIFICIATA IN COLONNA */

@@ -172,7 +172,7 @@ void chiTestCompare(double cv,double chiv){
 void getChiTestResult(double y1,double y2,double  x1,double x2,double chiv){
 
 	double result= y1+((y2-y1)*(chiv-x1)/(x2-x1));
-	printf("\n%lf ottenuto\nLa probabilità ottenuta dal Chi Test è del: %lf%c\n",result,100-result*100,'%');
+	printf("\np-value ottenuto= %lf\nLa probabilità ottenuta dal Chi Test è del: %lf%c\n",result,100-result*100,'%');
 	return;
 }
 
@@ -228,7 +228,7 @@ void chiTestCompare(FILE* fp, double chivalue,int df){
 	int stop=0;
 
 	if(df==0 || df <0 || df>50){
-		printf("Valore Degrees of Freedom DF invalido"); return;
+		printf("Valore Degrees of Freedom DF invalido.Valore= %d non ammesso\n",df); return;
 	}
 	c=fgetc(fp);
 	while(row<df || c!=EOF){ //mi sposto sulla riga pari a DF
@@ -305,7 +305,7 @@ void chiTestCompare(FILE* fp, double chivalue,int df){
 
 	if(pos1==-1 && pos2==-1){
 		printf("Caso1:Non contenuto\n"); //DA TOGLIERE
-		printf("Errore nel calcolo della probabilità: impossibile trovare il livello di significatività in Chi Table con grado %d\n",df);
+		printf("Errore nel calcolo della probabilità:Risultato impossibile\n");
 		return;
 	}
 	if(pos1==2 && pos2==-1){  		 //QUANDO CHI VALUE = EL IN COLONNA
