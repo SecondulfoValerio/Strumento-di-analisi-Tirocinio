@@ -280,10 +280,12 @@ for(int i=0;i<p3;i++){
 
 printf("\n-------------FINE TEST FUMATORITEST--------------\n");
 */
-FILE* filefumatori=fopen("testfumatori.txt","r");
-FILE* filesupfumatori=fopen("testfumatorisupporto.txt","r");
+//FILE* filefumatori=fopen("testfumatori.txt","r");
+//FILE* filesupfumatori=fopen("testfumatorisupporto.txt","r");
+FILE* filefumatori2=fopen("testfumatori2.txt","r");
+FILE* filesupfumatori2=fopen("testfumatorisupporto2.txt","r");
 FILE* chitabletest=fopen("chitable.txt","r");
-dotest(filefumatori,filesupfumatori,chitabletest);
+dotest(filefumatori2,filesupfumatori2,chitabletest);
 
 
 

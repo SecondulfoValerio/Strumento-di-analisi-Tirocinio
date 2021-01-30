@@ -9,8 +9,9 @@
 void dotest(FILE* test,FILE*support,FILE*chitable);//Esegue tutti i test partendo da principale
 void calculate();//Esegue tutti i calcoli del chi test
 void doprincipal(char*** matrice,int righematrice,int colonnematrice,int posPrincipale,int posOutput,FILE*chitable); //Esegue il test per la colonna principale e di output
-void dosecondary(FILE*test,FILE*chitable,char*** matrice,int* arraysecondario, int elemsecondario,int righematrice,int colonnematrice,int posInout,int posOutput);
-void docombinations();//Esegue il test combinando tutte le colonne secondarie
+void dofiltered(FILE*test,FILE*chitable,char*** matrice,int* arraysecondario, int elemsecondario,int righematrice,int colonnematrice,int posInout,int posOutput); //Esegue il test filtrando per ogni categoria di ogni colonna secondaria
+void docombinations(FILE*test,FILE*chitable,char*** matrice,int* arraysecondario, int elemsecondario,int righematrice,int colonnematrice,int posInout,int posOutput);//Esegue il test combinando tutte le colonne secondarie
+void getmatrixtestvalues(double**matriced,char*** matrice,int righematchar,int righe,int colonne,int colonnaI,int colonnaO);//Stampa in output % delle categorie Principale e Output partecipanti al test
 
 
 void dotest(FILE* test,FILE*support,FILE*chitable){
@@ -22,9 +23,15 @@ int righematrice=numrow(test);
 int colonnematrice=numcolMat(test);
 int posPrincipale=getposPrincipal(support);
 int posOutput=getposOutput(support);
-
+printf("------INIZIO PRINCIPALE------\n");
 doprincipal(matrice,righematrice,colonnematrice,posPrincipale,posOutput,chitable);
-dosecondary(test,chitable,matrice,arrsupporto,elementisupporto,righematrice,colonnematrice,posPrincipale,posOutput);
+printf("------FINE PRINCIPALE------\n");
+printf("------INIZIO FILTRAGGIO------\n");
+dofiltered(test,chitable,matrice,arrsupporto,elementisupporto,righematrice,colonnematrice,posPrincipale,posOutput);
+printf("------FINE FILTRAGGIO------\n");
+printf("------INIZIO COMBINAZIONI------\n");
+docombinations(test,chitable,matrice,arrsupporto,elementisupporto,righematrice,colonnematrice,posPrincipale,posOutput);
+printf("------FINE COMBINAZIONI------\n");
 }
 
 void getmatrixtestvalues(double**matriced,char*** matrice,int righematchar,int righe,int colonne,int colonnaI,int colonnaO){
@@ -63,14 +70,11 @@ void calculate(char*** matrice,int righematrice,int posPrincipale,int posOutput,
 }
 
 void doprincipal(char*** matrice,int righematrice,int colonnematrice,int posPrincipale,int posOutput,FILE*chitable){
-	printf("------ESEGUO PRINCIPALE------\n");
 	calculate(matrice,righematrice,posPrincipale,posOutput,chitable);
-	printf("------FINE PRINCIPALE------\n\n\n\n");
 
 }
 
-void dosecondary(FILE*test,FILE*chitable,char*** matrice,int* arraysecondario, int elemsecondario,int righematrice,int colonnamatrice,int posInput,int posOutput){
-	printf("------ESEGUO SECONDARIA------\n");
+void dofiltered(FILE*test,FILE*chitable,char*** matrice,int* arraysecondario, int elemsecondario,int righematrice,int colonnamatrice,int posInput,int posOutput){
 	int* occorrenzesupport=secondarycol(arraysecondario,elemsecondario);
 
 for(int i=0;i<elemsecondario;i++){
@@ -98,8 +102,92 @@ for(int i=0;i<elemsecondario;i++){
 
 	}
 }
-printf("------FINE SECONDARIA------\n");
 }
+
+void docombinations(FILE*test,FILE*chitable,char*** matrice,int* arraysecondario, int elemsecondario,int righematrice,int colonnematrice,int posInput,int posOutput){
+	int* occorrenzesupport=secondarycol(arraysecondario,elemsecondario);
+	int ultimosecondario=-1;
+	for(int i=0;i<elemsecondario;i++){
+		if(occorrenzesupport[i]==1)
+			ultimosecondario=i;
+	}
+	for(int i=0;i<elemsecondario;i++){
+		if(i==ultimosecondario)
+			break;
+		if(occorrenzesupport[i]==0) continue;
+		if(occorrenzesupport[i]==1){
+			printf("Filtro per colonna %d:",i); getNameColumn(test,i); printf("\n");
+			int numcategorie=getNumCategorie(matrice,righematrice,i);
+			char** categorie= getCategorie(matrice,righematrice,i,numcategorie);
+
+			for(int n=0;n<numcategorie;n++){
+				printf("Per %s\n",categorie[n]);
+				int catoccorrenze= getCatOccurence(matrice,righematrice,i,categorie[n]);
+				char*** matricefiltrata= filtermatrix(matrice,categorie[n],catoccorrenze,i,righematrice,colonnematrice);
+
+			for(int x=i+1;x<elemsecondario;x++){
+				if(occorrenzesupport[x]==0) continue;
+				if(occorrenzesupport[x]==1){
+					printf("Filtro per colonna %d:",x); getNameColumn(test,x); printf("\n");
+					int numcategorief=getNumCategorie(matricefiltrata,catoccorrenze,x);
+					char** categorief= getCategorie(matricefiltrata,catoccorrenze,x,numcategorief);
+
+					for(int y=0;y<numcategorief;y++){
+						printf("Per %s\n",categorief[y]);
+						int catoccorrenzef= getCatOccurence(matricefiltrata,catoccorrenze,x,categorief[y]);
+						char*** matricefiltrata2= filtermatrix(matricefiltrata,categorief[y],catoccorrenzef,x,catoccorrenze,colonnematrice);
+						for(int rf=0;rf<catoccorrenzef;rf++){ //DA TOGLIERE
+							for(int cf=0;cf<colonnematrice;cf++)
+								printf("%s ",matricefiltrata2[rf][cf]);
+							printf("\n");
+								}
+
+
+					calculate(matricefiltrata2,catoccorrenzef,posInput,posOutput,chitable);
+					printf("\n\n\n");
+			}
+
+		}
+	}
+
+
+			}
+		}
+	}
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*void dosecondary(FILE*test,FILE*chitable,char*** matrice,int* arraysecondario, int elemsecondario,int righematrice,int colonnamatrice,int posInput,int posOutput){
 int* occorrenzesupport=secondarycol(arraysecondario,elemsecondario);
