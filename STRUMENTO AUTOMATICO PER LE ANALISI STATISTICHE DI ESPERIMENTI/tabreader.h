@@ -3,9 +3,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#define MAX 50
-#define RELEVANT 1
-#define NOTRELEVANT 0
+#include<definitions.h>
 
 typedef char* stringa[MAX];
 
@@ -301,7 +299,7 @@ void getNameColumn(FILE* fp,int pos){
 				break;
 		}
 }
-	printf("\n");
+	//printf("\n");
 	return;
 }
 

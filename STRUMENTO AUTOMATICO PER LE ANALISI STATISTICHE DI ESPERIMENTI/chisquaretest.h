@@ -57,28 +57,6 @@ double expectedValue(double rowtot,double coltot, double eltot){
 	return (rowtot*coltot)/eltot;
 }
 
-/*
-double chivalue(double**matrice,int row,int col){
-	double tot=0;
-	double* sumrows=rowsums(matrice,row,col);
-	double* sumcol=columnsums(matrice,row,col);
-	double  totalElements=0;
-	double temp=0;
-	int matrixelements=row*col;
-	for(int i=0;i<row;i++)
-		totalElements+=sumrows[i];
-	for(int x=0;x<matrixelements;x++){
-		for(int r=0;r<row;r++)
-			for(int c=0;c<col;c++){
-				printf("\nCALCOLOCHIVALUE\n(%lf-%lf)^2/%lf\n",matrice[r][c],expectedValue(sumrows[r],sumcol[c],totalElements),expectedValue(sumrows[r],sumcol[c],totalElements));
-				temp=((matrice[r][c]- expectedValue(sumrows[r],sumcol[c],totalElements)));
-				tot+=temp*temp/expectedValue(sumrows[r],sumcol[c],totalElements);
-			}
-	}
-	return tot;
-}
-
-*/
 
 double chivalue(double**matrice,int row,int col){
 	double tot=0;

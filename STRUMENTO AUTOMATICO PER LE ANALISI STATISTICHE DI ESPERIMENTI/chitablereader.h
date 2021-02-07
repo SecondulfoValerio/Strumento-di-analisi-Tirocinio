@@ -1,6 +1,7 @@
 #ifndef CHITABLEREADER_H
 #define CHITABLEREADER_H
 #include <tabreader.h>
+#include <definitions.h>
 
 #define MAXNUM 10
 int getColumnNum(FILE* fp); // RITORNA NUMERO DI COLONNE CHAR TABLE
@@ -8,8 +9,7 @@ int getRowNum(FILE* fp); //RITORNA NUMERO DI RIGHE CHAR TABLE
 int getColPos(FILE* fp,double sl); //RITORNA POSIZIONE IN COLONNA DI VALORE SL
 int getRowPos(FILE* fp,int df); //RITORNA POSIZIONE IN RIGA DI DF
 double getCriticalValue(FILE* fp,int df,int sl); //RITORNA CRITICAL VALUE DALLA CHI TABLE
-//void chiTestCompare(double cv,double chiv); STAMPA IL RISULTATO DEL TEST
-void chiTestCompare(FILE* fp, double chivalue,int df); //STAMPA RISULTATO TEST (nuovo metodo)
+void chiTestCompare(FILE* fp, double chivalue,int df); //STAMPA RISULTATO TEST
 
 
 int getColumnNum(FILE* fp){
@@ -156,23 +156,13 @@ double getCriticalValue(FILE* fp,int df,int sl){
 	printf("Errore valore non trovato\n"); return -1;
 }
 
-/*
-void chiTestCompare(double cv,double chiv){
-	if(cv>chiv){
-		printf("Il valore Chi Value: %lf è inferiore rispetto al valore critico %lf\nL'ipotesi nulla non può essere rifiutata...\n",chiv,cv);
-	}
-	if(cv<chiv){
-			printf("Il valore Chi Value: %lf è uguale rispetto al valore critico %lf\nL'ipotesi nulla non può essere rifiutata...\n",chiv,cv);
-		}
-	if(cv<chiv){
-				printf("Il valore Chi Value: %lf è maggiore rispetto al valore critico %lf\nL'ipotesi nulla può essere rifiutata...\n",chiv,cv);
-			}
-} */
-
 void getChiTestResult(double y1,double y2,double  x1,double x2,double chiv){
 
 	double result= y1+((y2-y1)*(chiv-x1)/(x2-x1));
-	printf("\np-value ottenuto= %lf\nLa probabilità ottenuta dal Chi Test è del: %lf%c\n",result,100-result*100,'%');
+	if(verbose==1)
+		printf("\np-value ottenuto= %lf\nLa probabilità ottenuta dal Chi Test è del: %lf%c\n",result,100-result*100,'%');
+	else
+		printf("%.2lf%c\n",100-result*100,'%');
 	return;
 }
 
@@ -304,37 +294,46 @@ void chiTestCompare(FILE* fp, double chivalue,int df){
 	//FINE ELSE. ORA SI ANALIZZANO I CASI DEI VARI VALORI DI POS1 E POS2
 
 	if(pos1==-1 && pos2==-1){
-		printf("Caso1:Non contenuto\n"); //DA TOGLIERE
+		if(verbose==1)
+			printf("Caso1:Non contenuto\n"); //DA TOGLIERE
 		printf("Errore nel calcolo della probabilità:Risultato impossibile\n");
 		return;
 	}
 	if(pos1==2 && pos2==-1){  		 //QUANDO CHI VALUE = EL IN COLONNA
-		printf("Caso2:Valore<colonna 1\n");  //DA TOGLIERE
-		printf("DF=%d ",df); //DA TOGLIERE
-		printf("Y2=%lf - X1=%lf - CHI VALUE=%lf\n",getSignificanceLevel(fp,pos1),atof(temp1),chivalue);
+		if(verbose==1){
+			printf("Caso2:Valore<colonna 1\n");  //DA TOGLIERE
+			printf("DF=%d ",df); //DA TOGLIERE
+			printf("Y2=%lf - X1=%lf - CHI VALUE=%lf\n",getSignificanceLevel(fp,pos1),atof(temp1),chivalue);
+		}
 		getChiTestResult(0,getSignificanceLevel(fp,pos1),0,atof(temp1),chivalue);
 		return;
 	}
 	if(pos2==-2){  		 //QUANDO CHI VALUE = EL IN COLONNA
-		printf("Caso3:Valore==colonna\n");  //DA TOGLIERE
-		printf("DF=%d ",df); //DA TOGLIERE
-		printf("Y2=%lf - X1=%lf - CHI VALUE=%lf\n",getSignificanceLevel(fp,pos1),atof(temp1),chivalue);
+		if(verbose==1){
+			printf("Caso3:Valore==colonna\n");  //DA TOGLIERE
+			printf("DF=%d ",df); //DA TOGLIERE
+			printf("Y2=%lf - X1=%lf - CHI VALUE=%lf\n",getSignificanceLevel(fp,pos1),atof(temp1),chivalue);
+		}
 		getChiTestResult(0,getSignificanceLevel(fp,pos1),0,atof(temp1),chivalue);
 		return;
 	}
 	if(pos1==12 && pos2==-1){		//QUANDO CHI VALUE > EL IN 12A COLONNA (ultima colonna)
-		printf("Caso4:Valore>Ultima colonna\n");  //DA TOGLIERE
-		printf("DF=%d ",df); //DA TOGLIERE
-		printf("Y2=%lf - X1=%lf - CHI VALUE=%lf\n",getSignificanceLevel(fp,pos1),atof(temp1),chivalue);
+		if(verbose==1){
+			printf("Caso4:Valore>Ultima colonna\n");  //DA TOGLIERE
+			printf("DF=%d ",df); //DA TOGLIERE
+			printf("Y2=%lf - X1=%lf - CHI VALUE=%lf\n",getSignificanceLevel(fp,pos1),atof(temp1),chivalue);
+		}
 		getChiTestResult(0,getSignificanceLevel(fp,pos1),0,atof(temp1),chivalue);
 		return;
 	}
 	/*caso in cui il chi value è compreso tra due valori*/
 	if(pos1<13 && pos2>1){
-		printf("Caso5:Valori compresi tra prima e ultima colonna\n");  //DA TOGLIERE
-		printf("DF=%d ",df); //DA TOGLIERE
-		printf("Y1=%lf - Y2=%lf - X2=%lf - X1=%lf - CHIV=%lf\n",getSignificanceLevel(fp,pos2),getSignificanceLevel(fp,pos1),
-				atof(temp1),atof(temp2),chivalue);
+		if(verbose==1){
+			printf("Caso5:Valori compresi tra prima e ultima colonna\n");  //DA TOGLIERE
+			printf("DF=%d ",df); //DA TOGLIERE
+			printf("Y1=%lf - Y2=%lf - X2=%lf - X1=%lf - CHIV=%lf\n",getSignificanceLevel(fp,pos2),getSignificanceLevel(fp,pos1),
+					atof(temp1),atof(temp2),chivalue);
+		}
 		getChiTestResult(getSignificanceLevel(fp,pos2),getSignificanceLevel(fp,pos1),atof(temp2),atof(temp1),chivalue);
 
 	}
