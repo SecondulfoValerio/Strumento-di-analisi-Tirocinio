@@ -23,8 +23,10 @@ int* arrsupporto=initlist(support);
 int elementisupporto=numcolSup(support);
 int righematrice=numrow(test);
 int colonnematrice=numcolMat(test);
-int posPrincipale=getposPrincipal(support);
-int posOutput=getposOutput(support);
+int posPrincipale=getposPrincipal(arrsupporto,elementisupporto);
+int posOutput=getposOutput(arrsupporto,elementisupporto);
+//int posPrincipale=getposPrincipal(support);
+//int posOutput=getposOutput(support);
 if(verbose==1)
 	printf("------INIZIO PRINCIPALE------\n");
 doprincipal(matrice,righematrice,colonnematrice,posPrincipale,posOutput,chitable,test);

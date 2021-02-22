@@ -16,8 +16,10 @@ void testElements(int* relations,int colonne);
 void testgetNumCategorie(char*** tabella,int righe,int pos);
 void testgetCategorie(char*** matrice,int righe, int pos, int catnum);
 void testprintMatTest(double** matrice,int righe,int colonne);
-void testgetposPrincipal(FILE* fp);
-void testgetposOutuput(FILE* fp);
+void testgetposPrincipal(int* arr,int el);
+void testgetposPrincipal(int* arr,int el);
+//void testgetposPrincipal(FILE* fp);
+//void testgetposOutuput(FILE* fp);
 void testgetNameColumn(FILE* fp,int pos);
 void testtotalElements(double** matrice, int row, int col);
 void testdegfreedom(int row,int col);
@@ -113,13 +115,13 @@ void testprintMatTest(double** matrice,int righe,int colonne){
 }
 
 //STAMPA POSIZIONE COLONNA PRINCIPALE
-void testgetposPrincipal(FILE* fp){
-	printf("La colonna Principale è la %da\n",getposPrincipal(fp)+1);
+void testgetposPrincipal(int* arr, int el){
+	printf("La colonna Principale è la %da\n",getposPrincipal(arr,el)+1);
 
 }
 //STAMPA POSIZIONE COLONNA OUTUPUT
-void testgetposOutuput(FILE* fp){
-	printf("La colonna Outuput è la %da\n",getposOutput(fp)+1);
+void testgetposOutuput(int* arr, int el){
+	printf("La colonna Outuput è la %da\n",getposOutput(arr,el)+1);
 }
 //STAMPA NOME IN COLONNA POS
 void testgetNameColumn(FILE* fp,int pos){

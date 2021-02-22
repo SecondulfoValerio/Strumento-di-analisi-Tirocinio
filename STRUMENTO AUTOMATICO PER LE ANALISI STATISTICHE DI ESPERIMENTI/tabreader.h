@@ -20,8 +20,10 @@ int isPrincipal(int elemento);
 int isInput(int elemento);
 int isOutput(int elemento);
 char* getDescription(int elemento);
-int getposPrincipal(FILE* fp); //restituisce posizione colonna Principale
-int getposOutput(FILE* fp); //restituisce posizione colonna Output
+int getposPrincipal(int* arr,int el);
+int getposOutput(int* arr,int el);
+//int getposPrincipal(FILE* fp); //restituisce posizione colonna Principale
+//int getposOutput(FILE* fp); //restituisce posizione colonna Output
 void getNameColumn(FILE* fp,int pos);//Ritorna nome colonna in pos
 
 int numcolSup(FILE*fp){ //restituisce int numero colonne per l'array del file di supporto
@@ -239,7 +241,32 @@ char* getDescription(int valore){
 		return ("WRPO");
 return NULL;
 }
+int getposPrincipal(int* arr,int el){
+	int pos=0;
+	for(int i=0;i<el;i++){
+		if(isPrincipal(arr[i])){
+			return pos;
+		}
+		pos++;
+	}
+	printf("colonna principale non trovata\n");
+	return -1;
+}
 
+int getposOutput(int* arr,int el){
+	int pos=0;
+	for(int i=0;i<el;i++){
+		if(isOutput(arr[i])){
+			return pos;
+		}
+		pos++;
+	}
+	printf("colonna output non trovata\n");
+	return -1;
+}
+
+
+/*
 int getposPrincipal(FILE* fp){
 	fseek(fp,0,SEEK_SET);
 	int pos=0;
@@ -273,6 +300,7 @@ int getposOutput(FILE* fp){
 	printf("Colonna Output non trovata\n");
 	return -1;
 }
+*/
 
 void getNameColumn(FILE* fp,int pos){
 	if(fp==NULL){printf("File non trovato\n");}
