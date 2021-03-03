@@ -13,7 +13,8 @@ verbose=atoi(argv[3]);
 if(verbose!=1 && verbose!=0){
 	printf("Flag invalido\n"); return 0;
 }
-FILE* chitable=fopen("chitable.txt","r"); if(chitable==NULL){printf("File chitable inesistente\n");return 0;}
+//FILE* chitable=fopen("chitable.txt","r"); if(chitable==NULL){printf("File chitable inesistente\n");return 0;}
+FILE* chitable=fopen("chitablemax.txt","r"); if(chitable==NULL){printf("File chitable inesistente\n");return 0;}
 FILE* filetest=fopen(argv[1],"r"); if(filetest==NULL){printf("File test inesistente\n");return 0;}
 FILE* filesupport=fopen(argv[2],"r"); if(filesupport==NULL){printf("File supporto inesistente\n");return 0;}
 int verbose=atoi(argv[3]);

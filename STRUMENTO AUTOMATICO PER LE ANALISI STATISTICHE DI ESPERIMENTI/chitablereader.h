@@ -217,7 +217,7 @@ void chiTestCompare(FILE* fp, double chivalue,int df){
 	int row=0;
 	int stop=0;
 
-	if(df==0 || df <0 || df>50){
+	if(df==0 || df <0 || df>250){
 		printf("Valore Degrees of Freedom DF invalido.Valore= %d non ammesso\n",df); return;
 	}
 	c=fgetc(fp);

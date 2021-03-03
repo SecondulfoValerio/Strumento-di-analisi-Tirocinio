@@ -93,6 +93,14 @@ void calculate(char*** matrice,int righematrice,int posPrincipale,int posOutput,
 }
 
 void doprincipal(char*** matrice,int righematrice,int colonnematrice,int posPrincipale,int posOutput,FILE*chitable,FILE*test){
+	if(verbose==1){
+		for(int i=0;i<righematrice;i++){
+			for(int j=0;j<colonnematrice;j++)
+				printf("%s ",matrice[i][j]);
+			printf("\n");
+		}
+		printf("Colonna PRINCIPALE: %d\nColonna OUTPUT: %d\n ",posPrincipale,posOutput);
+	}
 	calculate(matrice,righematrice,posPrincipale,posOutput,chitable,test);
 	printf("\n\n\n");
 

@@ -1,4 +1,4 @@
-Nome;Cognome;Età;Statura;Peso;Sesso;Capigliatura;Fumatore;Regione
+Nome;Cognome;Età;Statura;Peso;Genere;Capigliatura;Fumatore;Regione
 M;A;Adulto;Alto;Grasso;Maschio;Folta;Si;Lazio
 M;A;Giovane;Alto;Grasso;Maschio;Corti;Si;Lazio
 M;A;Vecchio;Alto;Grasso;Maschio;Pelata;Si;Lazio

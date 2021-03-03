@@ -20,8 +20,8 @@ int isPrincipal(int elemento);
 int isInput(int elemento);
 int isOutput(int elemento);
 char* getDescription(int elemento);
-int getposPrincipal(int* arr,int el);
-int getposOutput(int* arr,int el);
+int getposPrincipal(int* arr,int el); //ritorna colonna principale INPUT
+int getposOutput(int* arr,int el); //ritorna colonna principale OUTPUT
 //int getposPrincipal(FILE* fp); //restituisce posizione colonna Principale
 //int getposOutput(FILE* fp); //restituisce posizione colonna Output
 void getNameColumn(FILE* fp,int pos);//Ritorna nome colonna in pos
@@ -241,10 +241,10 @@ char* getDescription(int valore){
 		return ("WRPO");
 return NULL;
 }
-int getposPrincipal(int* arr,int el){
+int getposPrincipal(int* arr,int el){ //ritorna colonna PRINCIPALE INPUT
 	int pos=0;
 	for(int i=0;i<el;i++){
-		if(isPrincipal(arr[i])){
+		if(isPrincipal(arr[i]) && isInput(arr[i])){
 			return pos;
 		}
 		pos++;
@@ -256,7 +256,7 @@ int getposPrincipal(int* arr,int el){
 int getposOutput(int* arr,int el){
 	int pos=0;
 	for(int i=0;i<el;i++){
-		if(isOutput(arr[i])){
+		if(isOutput(arr[i]) && isPrincipal(arr[i])){
 			return pos;
 		}
 		pos++;
