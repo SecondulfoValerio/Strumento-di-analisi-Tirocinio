@@ -6,6 +6,8 @@ int* secondarycol(int* support,int el);//PRENDE IN INPUT L'ARRAY INT DEL FILE SU
 char*** filtermatrix(char*** matrix,char* categoria, int occorrenze,int colonna,int righemat,int colonnemat);/*PARTE DALLA MATRICE INIALE
  E CREA UNA MATRICE FILTRANDO SOLO LE RIGHE AVENTI LA CATEGORIA SPECIFICIATA IN COLONNA */
 
+
+/*
 int* secondarycol(int* support,int el){
 	int* secrel=(int*)calloc(el,sizeof(int));
 	for(int i=0;i<el;i++){
@@ -16,6 +18,19 @@ int* secondarycol(int* support,int el){
 	}
 	return secrel;
 }
+*/
+
+int* secondarycol(int* support,int el){
+	int* secrel=(int*)calloc(el,sizeof(int));
+	for(int i=0;i<el;i++){
+		if(isRelevant(support[i])==1 && isSecondary(support[i])==1)
+			secrel[i]=1;
+		else
+			secrel[i]=0;
+	}
+	return secrel;
+}
+
 
 char*** filtermatrix(char*** matrix,char* categoria, int occorrenze,int colonna,int righemat,int colonnemat){
 	char*** matrixfiltered=(char***)calloc(occorrenze, sizeof(char**));

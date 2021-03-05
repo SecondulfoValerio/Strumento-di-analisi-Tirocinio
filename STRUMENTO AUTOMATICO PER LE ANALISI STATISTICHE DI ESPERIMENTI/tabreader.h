@@ -195,6 +195,11 @@ int isPrincipal(int elemento){
 			return 1;
 		return 0;
 }
+int isSecondary(int elemento){
+	if(elemento==0 ||elemento==1 ||elemento==4 ||elemento==5 ||elemento==8 ||elemento==9 ||elemento==12 ||elemento==13)
+		return 1;
+	return 0;
+}
 int isInput(int elemento){
 	if(elemento==0 ||elemento==2 ||elemento==4 ||elemento==6 ||elemento==8 ||elemento==10 ||elemento==12 ||elemento==14)
 		return 1;

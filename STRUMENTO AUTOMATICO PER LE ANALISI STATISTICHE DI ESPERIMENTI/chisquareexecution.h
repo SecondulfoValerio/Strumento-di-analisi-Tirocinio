@@ -107,9 +107,11 @@ void doprincipal(char*** matrice,int righematrice,int colonnematrice,int posPrin
 }
 
 void dofiltered(FILE*test,FILE*chitable,char*** matrice,int* arraysecondario, int elemsecondario,int righematrice,int colonnamatrice,int posInput,int posOutput){
-	int* occorrenzesupport=secondarycol(arraysecondario,elemsecondario);
+
+int* occorrenzesupport=secondarycol(arraysecondario,elemsecondario);
 
 for(int i=0;i<elemsecondario;i++){
+	printf("ELEMENTO SECONDARIO %d = %d\n",i,occorrenzesupport[i]);
 	if(occorrenzesupport[i]==0) continue;
 	if(occorrenzesupport[i]==1){
 		if(verbose==1){
@@ -146,9 +148,10 @@ void docombinations(FILE*test,FILE*chitable,char*** matrice,int* arraysecondario
 		if(occorrenzesupport[i]==1)
 			ultimosecondario=i;
 	}
+
 	for(int i=0;i<elemsecondario;i++){
 		if(i==ultimosecondario)
-			break;
+			return; //PRIMA ERA BREAK
 		if(occorrenzesupport[i]==0) continue;
 		if(occorrenzesupport[i]==1){
 			if(verbose==1){
@@ -180,14 +183,17 @@ void docombinations(FILE*test,FILE*chitable,char*** matrice,int* arraysecondario
 					printf("Filtro:");getNameColumn(test,i); printf("=%s,",categorie[n]); getNameColumn(test,x); printf("=%s\n",categorief[y]);
 
 					if(verbose==1){ //STAMPA ELEMENTI MATRICE
+												printf("Righe=%d Colonne=%d\n",catoccorrenzef,colonnematrice);
 												for(int rf=0;rf<catoccorrenzef;rf++){
 													for(int cf=0;cf<colonnematrice;cf++)
 														printf("%s ",matricefiltrata2[rf][cf]);
 													printf("\n");
 														}
 											}
-
-					calculate(matricefiltrata2,catoccorrenzef,posInput,posOutput,chitable,test);
+					if(catoccorrenzef>1)
+						calculate(matricefiltrata2,catoccorrenzef,posInput,posOutput,chitable,test);
+					else
+						printf("Occorrenze insufficienti\n");
 					printf("\n\n\n");
 			}
 

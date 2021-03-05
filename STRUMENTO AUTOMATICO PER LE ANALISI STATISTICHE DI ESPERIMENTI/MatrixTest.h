@@ -83,6 +83,13 @@ double** makeTestMatrix(char*** matrice,int righe,int colonnaI,int colonnaO){
 	char** catI= getCategorie(matrice,righe,colonnaI,rows); //array con le categorie nella colonna Input
 	char** catO= getCategorie(matrice,righe,colonnaO,col); //array col le categorie nella colonna Output
 	double** testmatrix= (double**)calloc(rows,sizeof(double*));
+	if(rows==0 || col==0){ //TEST
+		for(int i=0;i<2;i++)
+			for(int j=0;j<2;j++)
+				testmatrix[i][j]=0;
+		return testmatrix;
+	}
+
 	if(col==1){
 		for(int i=0;i<rows;i++){
 				testmatrix[i]=(double*)calloc(col,sizeof(double));
