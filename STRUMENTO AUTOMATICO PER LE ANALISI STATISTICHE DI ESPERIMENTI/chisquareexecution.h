@@ -111,7 +111,7 @@ void dofiltered(FILE*test,FILE*chitable,char*** matrice,int* arraysecondario, in
 int* occorrenzesupport=secondarycol(arraysecondario,elemsecondario);
 
 for(int i=0;i<elemsecondario;i++){
-	printf("ELEMENTO SECONDARIO %d = %d\n",i,occorrenzesupport[i]);
+
 	if(occorrenzesupport[i]==0) continue;
 	if(occorrenzesupport[i]==1){
 		if(verbose==1){
